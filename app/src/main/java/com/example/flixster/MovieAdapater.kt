@@ -3,6 +3,7 @@ package com.example.flixster
 import android.view.ViewGroup
 import android.view.View
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ImageView
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
+const val MOVIE_EXTRA = "MOVIE_EXTRA"
 private  const val TAG = "MovieAdapter"
 class MovieAdapater(private val context: Context, private val movies: List<Movie>)
     : RecyclerView.Adapter<MovieAdapater.ViewHolder>() {
@@ -47,7 +49,11 @@ class MovieAdapater(private val context: Context, private val movies: List<Movie
 
         override fun onClick(p0: View?) {
             val movie = movies[adapterPosition]
-            Toast.makeText(context, movie.title, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, movie.title, Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("movie_title", movie.title)
+            intent.putExtra(MOVIE_EXTRA, movie)
+            context.startActivity(intent)
         }
     }
 }
